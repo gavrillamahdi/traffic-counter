@@ -16,11 +16,19 @@
   "plugins": ["react", "react-hooks", "import", "jsx-a11y", "@typescript-eslint"],
   "rules": {
     "no-console": "warn",
-    "react/jsxjsx-filename-extension": [
+    "react/jsx-filename-extension": [
       "warn",
       {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
 }
