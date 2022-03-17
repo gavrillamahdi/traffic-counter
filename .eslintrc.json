@@ -22,7 +22,8 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
-    "global-require": "off"
+    "global-require": "off",
+    "import/no-extraneous-dependencies": "off"
   },
   "overrides": [
     {
