@@ -28,7 +28,9 @@
     {
       "files": ["*.ts", "*.tsx"],
       "rules": {
-        "no-undef": "off"
+        "no-undef": "off",
+        "import/no-unresolved": "off",
+        "import/extensions": "off"
       }
     }
   ]
