@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "clsx": "^1.1.1",
     "daisyui": "^2.9.0",
     "dayjs": "^1.11.0",
     "exceljs": "^4.3.0",
