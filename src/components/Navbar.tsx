@@ -7,7 +7,6 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 
 export default function Navbar(): JSX.Element {
   const [theme] = useLocalStorage<string | null>('theme', null);
-  console.log(theme);
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -28,7 +27,7 @@ export default function Navbar(): JSX.Element {
         </a>
       </header>
       <div
-        className="swap-rotate btn swap btn-ghost btn-square"
+        className="btn swap btn-ghost btn-square swap-rotate"
         {...buttonize(() => {
           setIsChecked(!isChecked);
         })}
