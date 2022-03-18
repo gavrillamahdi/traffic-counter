@@ -19,7 +19,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/components/*": ["./components/*"],
-      "@/hooks/*": ["./hooks/*"]
+      "@/hooks/*": ["./hooks/*"],
+      "@/libs": ["./libs/*"]
     }
   },
   "include": ["src"],
