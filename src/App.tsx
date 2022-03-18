@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 import Navbar from '@/components/Navbar';
+import Form from '@/components/Form';
 
 export default function App(): JSX.Element {
   const [onTop, setOnTop] = React.useState<boolean>(true);
@@ -20,8 +21,8 @@ export default function App(): JSX.Element {
       <header className={clsx('sticky top-0', onTop || 'shadow-sm shadow-base-content/10')}>
         <Navbar />
       </header>
-      <main className="">
-        <h1>Hello World</h1>
+      <main className="p-10">
+        <Form />
       </main>
     </>
   );
