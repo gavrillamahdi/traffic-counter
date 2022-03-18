@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
 
 type SetValue<T> = Dispatch<SetStateAction<T>>;
@@ -69,11 +70,6 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
     setStoredValue(readValue());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleStorageChange = useCallback(() => {
-    setStoredValue(readValue());
-  }, [readValue]);
-
   return [storedValue, setValue];
 }
 
