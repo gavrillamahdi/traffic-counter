@@ -8,7 +8,7 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 export default function Navbar(): JSX.Element {
   const [theme] = useLocalStorage<string | null>('theme', null);
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     if (!theme) document.querySelector('html')?.setAttribute('data-theme', 'dracula');
@@ -19,15 +19,15 @@ export default function Navbar(): JSX.Element {
     themeChange(false);
   }, []);
   return (
-    <nav className="navbar sticky top-0 bg-base-100">
-      <header className="flex-1">
+    <nav className="navbar bg-base-100">
+      <div className="flex-1">
         <a href="/" className="btn btn-ghost">
           {' '}
           <h1 className=" font-qs text-2xl font-bold normal-case text-primary">Traffic Counter</h1>
         </a>
-      </header>
+      </div>
       <div
-        className="btn swap btn-ghost btn-square swap-rotate"
+        className="swap-rotate btn swap btn-ghost btn-square"
         {...buttonize(() => {
           setIsChecked(!isChecked);
         })}
