@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { themeChange } from 'theme-change';
+import clsx from 'clsx';
 
 import buttonize from '@/libs/buttonize';
 import useLocalStorage from '@/hooks/useLocalStorage';
@@ -9,6 +10,7 @@ export default function Navbar(): JSX.Element {
   const [theme] = useLocalStorage<string | null>('theme', null);
 
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [inputFocus, setInputFocus] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     if (!theme) document.querySelector('html')?.setAttribute('data-theme', 'dracula');
@@ -21,19 +23,26 @@ export default function Navbar(): JSX.Element {
   return (
     <nav className="navbar bg-base-100">
       <div className="flex-1">
-        <a href="/" className="btn btn-ghost">
+        <a href="/" className="btn btn-ghost focus-visible:outline-1 focus-visible:outline-primary">
           {' '}
           <h1 className=" font-qs text-2xl font-bold normal-case text-primary">Traffic Counter</h1>
         </a>
       </div>
       <div
-        className="swap-rotate btn swap btn-ghost btn-square"
+        className="swap-rotate btn swap btn-ghost btn-square focus-visible:outline-1 focus-visible:outline-primary"
         {...buttonize(() => {
           setIsChecked(!isChecked);
         })}
         data-toggle-theme="garden,dracula"
       >
-        <input type="checkbox" checked={isChecked} readOnly />
+        <input
+          type="checkbox"
+          checked={isChecked}
+          tabIndex={-1}
+          // onFocus={() => setInputFocus(true)}
+          // onBlur={() => setInputFocus(false)}
+          readOnly
+        />
 
         <svg
           className="swap-on h-6 w-6 fill-current"
