@@ -30,6 +30,7 @@
       "files": ["*.ts", "*.tsx"],
       "rules": {
         "no-undef": "off",
+        "no-unused-vars": "warn",
         "import/no-unresolved": "off",
         "import/extensions": "off"
       }
