@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { themeChange } from 'theme-change';
-import clsx from 'clsx';
 
 import buttonize from '@/libs/buttonize';
 import useLocalStorage from '@/hooks/useLocalStorage';
@@ -10,7 +9,6 @@ export default function Navbar(): JSX.Element {
   const [theme] = useLocalStorage<string | null>('theme', null);
 
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [inputFocus, setInputFocus] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     if (!theme) document.querySelector('html')?.setAttribute('data-theme', 'dracula');
