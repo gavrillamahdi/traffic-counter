@@ -33,14 +33,7 @@ export default function Navbar(): JSX.Element {
         })}
         data-toggle-theme="garden,dracula"
       >
-        <input
-          type="checkbox"
-          checked={isChecked}
-          tabIndex={-1}
-          // onFocus={() => setInputFocus(true)}
-          // onBlur={() => setInputFocus(false)}
-          readOnly
-        />
+        <input type="checkbox" checked={isChecked} tabIndex={-1} readOnly />
 
         <svg
           className="swap-on h-6 w-6 fill-current"
