@@ -8,7 +8,7 @@ interface TimeDataProviderProps {
 
 interface TimeDataContextType {
   timeData: TimeData;
-  setTimeData?: (timeData: TimeData) => void;
+  setTimeData: React.Dispatch<React.SetStateAction<TimeData>>;
 }
 
 const TIME: Time = {
@@ -21,6 +21,7 @@ const TIME_DATA = { start: TIME, end: TIME, interval: TIME };
 
 const TimeDataContext = React.createContext<TimeDataContextType>({
   timeData: TIME_DATA,
+  setTimeData: (timeData) => {},
 });
 
 export function TimeDataProvider({ children }: TimeDataProviderProps): JSX.Element {
