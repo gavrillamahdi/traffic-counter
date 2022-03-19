@@ -27,7 +27,9 @@ export default function makeTimeInterval(timeData: TimeData): string[] {
 
   // @ts-ignore
   const start = dayjs(timeData.start); // @ts-ignore
-  const end = dayjs(timeData.end); // @ts-ignore
+  const end = dayjs(timeData.end).isAfter(start) // @ts-ignore
+    ? dayjs(timeData.end) // @ts-ignore
+    : dayjs(timeData.end).add(1, 'day'); // @ts-ignore
   const interval = dayjs.duration(timeData.interval).asMilliseconds(); // convert to milliseconds
 
   let current: dayjs.Dayjs = start.clone();
