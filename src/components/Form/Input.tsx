@@ -60,7 +60,11 @@ export default function Input({
             }));
           }
 
-          if (value.length === 2 || +value > (fraction === 'hour' ? 2 : 5)) {
+          if (
+            value.length === 2 ||
+            +value > (fraction === 'hour' ? 2 : 5) ||
+            (!value.endsWith('0') && inputValue.zeroOccurance !== 0)
+          ) {
             if (nextNode) nextNode.focus();
             setInputValue((prev) => ({
               ...prev,
