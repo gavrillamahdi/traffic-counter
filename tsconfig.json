@@ -20,7 +20,9 @@
       "@/*": ["./src/*"],
       "@/components/*": ["./components/*"],
       "@/hooks/*": ["./hooks/*"],
-      "@/libs": ["./libs/*"]
+      "@/libs/*": ["./libs/*"],
+      "@/context/*": ["./context/*"],
+      "@/types/*": ["./types/*"]
     }
   },
   "include": ["src"],
