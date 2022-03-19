@@ -21,13 +21,13 @@ export default function Navbar(): JSX.Element {
   return (
     <nav className="navbar bg-base-100">
       <div className="flex-1">
-        <a href="/" className="btn btn-ghost focus-visible:outline-1 focus-visible:outline-primary">
+        <a href="/" className="btn btn-ghost focus-visible:outline-2 focus-visible:outline-primary">
           {' '}
           <h1 className=" font-qs text-2xl font-bold normal-case text-primary">Traffic Counter</h1>
         </a>
       </div>
       <div
-        className="swap-rotate btn swap btn-ghost btn-square focus-visible:outline-1 focus-visible:outline-primary"
+        className="btn swap btn-ghost btn-square swap-rotate focus-visible:outline-2 focus-visible:outline-primary"
         {...buttonize(() => {
           setIsChecked(!isChecked);
         })}
