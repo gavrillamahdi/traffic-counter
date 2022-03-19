@@ -1,8 +1,9 @@
 /* eslint jsx-a11y/label-has-associated-control: ["error", { assert: "either" } ] */
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import InputSection from '@/components/Form/InputSection';
 import { useTimeDataContext } from '@/context/TimeDataProvider';
+import makeTimeInterval from '@/libs/makeTimeInterval';
 
 interface FormProps {}
 
@@ -43,9 +44,13 @@ export default function Form({}: FormProps): JSX.Element {
     setInputEls(document.querySelectorAll('input[type=number]'));
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
+  const handleSubmit = useMemo(
+    () => (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      console.log(makeTimeInterval(timeData));
+    },
+    [timeData]
+  );
 
   return (
     <form
