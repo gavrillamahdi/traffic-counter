@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 import Navbar from '@/components/Navbar';
 import Form from '@/components/Form';
+import { TimeDataProvider } from '@/context/TimeDataProvider';
 
 export default function App(): JSX.Element {
   const [onTop, setOnTop] = React.useState<boolean>(true);
@@ -22,7 +23,9 @@ export default function App(): JSX.Element {
         <Navbar />
       </header>
       <main className="p-10">
-        <Form />
+        <TimeDataProvider>
+          <Form />
+        </TimeDataProvider>
       </main>
     </>
   );
