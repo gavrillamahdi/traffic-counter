@@ -1,9 +1,8 @@
 /* eslint jsx-a11y/label-has-associated-control: ["error", { assert: "either" } ] */
 import React, { useState } from 'react';
 
-import { TimeData, Time } from '@/types/TimeDataType';
+import InputSection from '@/components/Form/InputSection';
 import { useTimeDataContext } from '@/context/TimeDataProvider';
-import InputSection from './InputSection';
 
 interface FormProps {}
 
@@ -36,7 +35,10 @@ const sliceNodeList = (
 ): HTMLInputElement[] => Array.from(nodeList).slice(start, end);
 
 export default function Form({}: FormProps): JSX.Element {
+  const { timeData } = useTimeDataContext();
+
   const [inputEls, setInputEls] = useState<NodeListOf<HTMLInputElement>>();
+
   React.useEffect(() => {
     setInputEls(document.querySelectorAll('input[type=number]'));
   }, []);
@@ -54,6 +56,7 @@ export default function Form({}: FormProps): JSX.Element {
         <InputSection
           key={title}
           inputSectionName={title}
+          section={Object.keys(timeData)[index] as 'start' | 'end' | 'interval'}
           inputIds={[START_ID, END_ID, INTERVAL_ID][index]}
           fractions={FRACTIONS}
           spanContents={SPAN_CONTENT}
@@ -66,7 +69,7 @@ export default function Form({}: FormProps): JSX.Element {
       ))}
 
       <section className="flex justify-end pt-10 md:col-span-2 md:pt-2">
-        <button className="btn btn-primary" type="submit">
+        <button id="submit" className="btn btn-primary" type="submit">
           Create Table
         </button>
       </section>

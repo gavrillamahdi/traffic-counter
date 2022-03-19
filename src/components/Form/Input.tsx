@@ -3,16 +3,25 @@ import { useTimeDataContext } from '@/context/TimeDataProvider';
 
 interface InputProps {
   id: string;
+  section: 'start' | 'end' | 'interval';
   fraction: 'hour' | 'minute' | 'second';
   spanContent: 'h' | 'm' | 's';
   nextNode?: HTMLInputElement | undefined;
 }
 
-export default function Input({ id, fraction, spanContent, nextNode }: InputProps): JSX.Element {
+export default function Input({
+  id,
+  section,
+  fraction,
+  spanContent,
+  nextNode,
+}: InputProps): JSX.Element {
   const { setTimeData } = useTimeDataContext();
 
-  const [inputValue, setInputValue] = React.useState<string>('0');
-  console.log(inputValue);
+  const [inputValue, setInputValue] = React.useState<{ value: string; zeroOccurance: number }>({
+    value: '',
+    zeroOccurance: 0,
+  });
 
   return (
     <label htmlFor={id} className="input-group" key={id}>
@@ -20,19 +29,59 @@ export default function Input({ id, fraction, spanContent, nextNode }: InputProp
         id={id}
         type="number"
         className="input input-bordered text-center"
-        value={inputValue.padStart(2, '0')}
-        onChange={({ target: { value } }) => {
-          console.log(value, typeof value);
-          if (+value < (fraction === 'hour' ? 24 : 60) && +value >= 0) {
-            setInputValue(value);
+        value={inputValue.value.padStart(2, '0')}
+        onChange={({ target: { value }, nativeEvent }) => {
+          if ((nativeEvent as any).data === '0') {
+            const zeroOccurance = inputValue.zeroOccurance + 1;
+            setInputValue((prev) => ({
+              ...prev,
+              zeroOccurance: prev.zeroOccurance + 1,
+            }));
+
+            if (zeroOccurance === 2 && nextNode) {
+              nextNode.focus();
+              setInputValue((prev) => ({
+                ...prev,
+                zeroOccurance: 0,
+              }));
+              setTimeData((prev) => ({
+                ...prev,
+                [section]: { ...prev[section], [fraction]: value ? +value : 0 },
+              }));
+              return;
+            }
           }
-          if (value.length >= 2 || +value > (fraction === 'hour' ? 2 : 5)) {
+
+          if (+value < (fraction === 'hour' ? 24 : 60) && +value >= 0) {
+            setInputValue((prev) => ({ ...prev, value: value.replace(/0+/, '') }));
+            setTimeData((prev) => ({
+              ...prev,
+              [section]: { ...prev[section], [fraction]: +value },
+            }));
+          }
+
+          if (value.length === 2 || +value > (fraction === 'hour' ? 2 : 5)) {
             if (nextNode) nextNode.focus();
+            setInputValue((prev) => ({
+              ...prev,
+              zeroOccurance: 0,
+            }));
+            setTimeData((prev) => ({
+              ...prev,
+              [section]: { ...prev[section], [fraction]: value ? +value : 0 },
+            }));
           }
         }}
         onKeyDown={(e) => {
           if (['e', '+', '-'].includes(e.key)) e.preventDefault();
-          else if (['Backspace', 'Delete'].includes(e.key)) setInputValue('00');
+          else if (['Backspace', 'Delete'].includes(e.key)) {
+            e.preventDefault();
+            setInputValue((prev) => ({ ...prev, value: '0' }));
+            setTimeData((prev) => ({
+              ...prev,
+              [section]: { ...prev[section], [fraction]: 0 },
+            }));
+          }
         }}
         onFocus={(e) => e.target.select()}
       />

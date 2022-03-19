@@ -4,6 +4,7 @@ import Input from '@/components/Form/Input';
 
 interface InputSectionProps {
   inputIds: string[];
+  section: 'start' | 'end' | 'interval';
   fractions: ['hour', 'minute', 'second'];
   spanContents: ['h', 'm', 's'];
   inputSectionName: string;
@@ -12,6 +13,7 @@ interface InputSectionProps {
 
 export default function InputSection({
   inputIds,
+  section,
   fractions,
   spanContents,
   inputSectionName,
@@ -27,6 +29,7 @@ export default function InputSection({
           <Input
             key={id}
             id={id}
+            section={section}
             fraction={fractions[index]}
             spanContent={spanContents[index]}
             nextNode={nextNode ? nextNode[index + 1] : undefined}
