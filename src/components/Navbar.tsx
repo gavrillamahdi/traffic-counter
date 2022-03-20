@@ -28,6 +28,7 @@ export default function Navbar(): JSX.Element {
       </div>
       <div
         className="btn swap btn-ghost btn-square swap-rotate focus-visible:outline-2 focus-visible:outline-primary"
+        title="change theme"
         {...buttonize(() => {
           setIsChecked(!isChecked);
         })}
