@@ -6,6 +6,8 @@ import Form from '@/components/Form';
 import Table from '@/components/Table';
 
 import { TimeDataContextProvider } from '@/context/TimeDataContext';
+import { TableContextProvider } from '@/context/TableContext';
+
 import { ColumnType } from '@/types/ExcelJsType';
 
 const COLUMN: ColumnType[] = [
@@ -35,11 +37,15 @@ export default function App(): JSX.Element {
       <header className={clsx('sticky top-0 z-20', onTop || 'shadow-sm shadow-base-content/10')}>
         <Navbar />
       </header>
+
       <main className="p-10">
         <TimeDataContextProvider>
           <Form setData={setTimeRanges} />
         </TimeDataContextProvider>
-        <Table columns={COLUMN} data={timeRanges} />
+
+        <TableContextProvider timeRanges={timeRanges}>
+          <Table columns={COLUMN} data={timeRanges} />
+        </TableContextProvider>
       </main>
     </>
   );
