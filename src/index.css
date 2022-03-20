@@ -17,11 +17,11 @@
   }
 
   .table th:first-child {
-    @apply relative;
+    @apply relative z-0;
   }
 
   .table th:nth-child(2) {
-    @apply sticky left-0 z-[11];
+    @apply sticky left-0 z-10;
   }
 }
 
