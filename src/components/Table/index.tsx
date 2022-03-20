@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import { useTableContext } from '@/context/TableContext';
 import { ColumnType } from '@/types/ExcelJsType';
-import TableBody from './TableBody';
+import TableBody from '@/components/Table/TableBody';
 
 interface TableProps {
   columns: ColumnType[];
@@ -12,6 +12,10 @@ interface TableProps {
 export default function Table({ columns }: TableProps): JSX.Element {
   const tableHead = columns.map(({ header }) => header);
   const { data } = useTableContext();
+
+  if (data.length === 0) {
+    return <section />;
+  }
 
   return (
     <section className="mx-auto mt-12 w-full overflow-x-auto rounded-lg shadow-md shadow-base-content/10 md:w-11/12">

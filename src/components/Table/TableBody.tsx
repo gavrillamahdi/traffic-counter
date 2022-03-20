@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 import { RowType } from '@/types/ExcelJsType';
-import TableData from './TableData';
+import TableData from '@/components/Table/TableData';
 
 interface TableBodyProps {
   index: number;
