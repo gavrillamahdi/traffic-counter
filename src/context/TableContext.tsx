@@ -14,15 +14,20 @@ interface TableContextType {
 const TableContext = React.createContext<TableContextType>({ data: [], setData: () => {} });
 
 export function TableContextProvider({ children, timeRanges }: TableContextProps): JSX.Element {
-  const [dataMapped, setDataMapped] = React.useState<RowType[]>(
-    timeRanges.map((item, index) => ({
+  const mapToRowType = (data: string[]): RowType[] =>
+    data.map((item, index) => ({
       no: index + 1,
       waktu: item,
       mc: 0,
       lv: 0,
       hv: 0,
-    }))
-  );
+    }));
+
+  const [dataMapped, setDataMapped] = React.useState<RowType[]>(mapToRowType(timeRanges));
+
+  React.useEffect(() => {
+    setDataMapped(mapToRowType(timeRanges));
+  }, [timeRanges]);
 
   const contextVal = React.useMemo(
     () => ({ data: dataMapped, setData: setDataMapped }),
