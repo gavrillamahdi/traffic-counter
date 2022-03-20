@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Form from '@/components/Form';
 import Table from '@/components/Table';
 
-import { TimeDataProvider } from '@/context/TimeDataContext';
+import { TimeDataContextProvider } from '@/context/TimeDataContext';
 import { ColumnType } from '@/types/ExcelJsType';
 
 const COLUMN: ColumnType[] = [
@@ -36,9 +36,9 @@ export default function App(): JSX.Element {
         <Navbar />
       </header>
       <main className="p-10">
-        <TimeDataProvider>
+        <TimeDataContextProvider>
           <Form setData={setTimeRanges} />
-        </TimeDataProvider>
+        </TimeDataContextProvider>
         <Table columns={COLUMN} data={timeRanges} />
       </main>
     </>

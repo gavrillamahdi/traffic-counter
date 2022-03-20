@@ -24,7 +24,7 @@ const TimeDataContext = React.createContext<TimeDataContextType>({
   setTimeData: (timeData) => {}, // eslint-disable-line no-unused-vars
 });
 
-export function TimeDataProvider({ children }: TimeDataProviderProps): JSX.Element {
+export function TimeDataContextProvider({ children }: TimeDataProviderProps): JSX.Element {
   const [timeData, setTimeData] = useState<TimeData>(TIME_DATA);
 
   const contextVal = React.useMemo(() => ({ timeData, setTimeData }), [timeData]);
