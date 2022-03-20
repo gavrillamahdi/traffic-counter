@@ -5,7 +5,9 @@ import InputSection from '@/components/Form/InputSection';
 import { useTimeDataContext } from '@/context/TimeDataProvider';
 import makeTimeInterval from '@/libs/makeTimeInterval';
 
-interface FormProps {}
+interface FormProps {
+  setData: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
 // id constant
 const START_ID_HOUR = 'start-hour';
@@ -35,8 +37,12 @@ const sliceNodeList = (
   end?: number | undefined
 ): HTMLInputElement[] => Array.from(nodeList).slice(start, end);
 
-export default function Form({}: FormProps): JSX.Element {
+export default function Form({ setData }: FormProps): JSX.Element {
   const { timeData } = useTimeDataContext();
+  const [error, setError] = useState<{ isError: boolean; message: string }>({
+    isError: false,
+    message: '',
+  });
 
   const [inputEls, setInputEls] = useState<NodeListOf<HTMLInputElement>>();
 
@@ -47,7 +53,16 @@ export default function Form({}: FormProps): JSX.Element {
   const handleSubmit = useMemo(
     () => (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(makeTimeInterval(timeData));
+      e.currentTarget.querySelector<HTMLButtonElement>('#submit')?.focus();
+      try {
+        const data = makeTimeInterval(timeData);
+        setData(data);
+        setError({ isError: false, message: '' });
+      } catch (err) {
+        if (err instanceof Error) {
+          setError({ isError: true, message: err.message });
+        }
+      }
     },
     [timeData]
   );
@@ -72,6 +87,29 @@ export default function Form({}: FormProps): JSX.Element {
           }
         />
       ))}
+
+      {error.isError && (
+        <section className="flex items-end justify-end md:col-span-2">
+          <div className="alert alert-error shadow-lg">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 flex-shrink-0 stroke-current"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+              <span>Error: {error.message}</span>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="flex justify-end pt-10 md:col-span-2 md:pt-2">
         <button id="submit" className="btn btn-primary" type="submit">
