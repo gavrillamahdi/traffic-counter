@@ -33,19 +33,21 @@ export default function Table({ columns }: TableProps): JSX.Element {
         </thead>
         <tbody>
           {data.map((row) => (
-            <tr key={row.no} className="grid grid-cols-10">
-              {Object.values(row).map((value, index) => (
-                <td
-                  key={index} // eslint-disable-line react/no-array-index-key
-                  className={clsx(
-                    index === 0 && 'col-span-1',
-                    index === 1 && 'col-span-3',
-                    index > 1 && 'col-span-2'
-                  )}
-                >
-                  {value}
-                </td>
-              ))}
+            <tr key={row.id} className="grid grid-cols-10">
+              {Object.values(row)
+                .slice(1)
+                .map((value, index) => (
+                  <td
+                    key={index} // eslint-disable-line react/no-array-index-key
+                    className={clsx(
+                      index === 0 && 'col-span-1',
+                      index === 1 && 'col-span-3',
+                      index > 1 && 'col-span-2'
+                    )}
+                  >
+                    {value}
+                  </td>
+                ))}
             </tr>
           ))}
         </tbody>
