@@ -3,9 +3,10 @@ import clsx from 'clsx';
 
 import Navbar from '@/components/Navbar';
 import Form from '@/components/Form';
+import Table from '@/components/Table';
+
 import { TimeDataProvider } from '@/context/TimeDataProvider';
-import { ColumnType, RowType } from '@/types/ExcelJsType';
-import saveExcel from './libs/exportExcel';
+import { ColumnType } from '@/types/ExcelJsType';
 
 const COLUMN: ColumnType[] = [
   { header: 'No', key: 'no' },
@@ -28,20 +29,17 @@ export default function App(): JSX.Element {
   }, []);
 
   const [timeRanges, setTimeRanges] = React.useState<string[]>([]);
-  console.log(timeRanges);
 
   return (
     <>
-      <header className={clsx('sticky top-0', onTop || 'shadow-sm shadow-base-content/10')}>
+      <header className={clsx('sticky top-0 z-20', onTop || 'shadow-sm shadow-base-content/10')}>
         <Navbar />
       </header>
       <main className="p-10">
         <TimeDataProvider>
           <Form setData={setTimeRanges} />
         </TimeDataProvider>
-        <button type="button" onClick={saveExcel}>
-          tes
-        </button>
+        <Table columns={COLUMN} data={timeRanges} />
       </main>
     </>
   );
