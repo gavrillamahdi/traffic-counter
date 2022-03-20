@@ -44,7 +44,7 @@ export default function App(): JSX.Element {
         </TimeDataContextProvider>
 
         <TableContextProvider timeRanges={timeRanges}>
-          <Table columns={COLUMN} data={timeRanges} />
+          <Table columns={COLUMN} />
         </TableContextProvider>
       </main>
     </>

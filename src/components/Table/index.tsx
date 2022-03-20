@@ -1,26 +1,19 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { ColumnType, RowType } from '@/types/ExcelJsType';
+import { useTableContext } from '@/context/TableContext';
+import { ColumnType } from '@/types/ExcelJsType';
 
 interface TableProps {
   columns: ColumnType[];
-  data: string[];
 }
 
-export default function Table({ columns, data }: TableProps): JSX.Element {
+export default function Table({ columns }: TableProps): JSX.Element {
   const tableHead = columns.map(({ header }) => header);
-  const dataMapped: RowType[] = data.map((row, index) => ({
-    no: index + 1,
-    waktu: row,
-    mc: 0,
-    lv: 0,
-    hv: 0,
-  }));
-  console.log(dataMapped);
+  const { data } = useTableContext();
 
   return (
-    <section className="mx-auto mt-12 w-full overflow-x-auto md:w-11/12">
+    <section className="mx-auto mt-12 w-full overflow-x-auto rounded-lg shadow-md shadow-base-content/10 md:w-11/12">
       <table className="table w-full">
         <thead>
           <tr className="grid grid-cols-10">
@@ -39,7 +32,7 @@ export default function Table({ columns, data }: TableProps): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {dataMapped.map((row) => (
+          {data.map((row) => (
             <tr key={row.no} className="grid grid-cols-10">
               {Object.values(row).map((value, index) => (
                 <td
