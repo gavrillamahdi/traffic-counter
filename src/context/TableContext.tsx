@@ -1,5 +1,4 @@
 import React from 'react';
-import { nanoid } from 'nanoid/non-secure';
 
 import { RowType } from '@/types/ExcelJsType';
 
@@ -8,21 +7,16 @@ interface TableContextProps {
   timeRanges: string[];
 }
 
-interface RowTypeWithId extends RowType {
-  id: string;
-}
-
 interface TableContextType {
-  data: RowTypeWithId[];
-  setData: React.Dispatch<React.SetStateAction<RowTypeWithId[]>>;
+  data: RowType[];
+  setData: React.Dispatch<React.SetStateAction<RowType[]>>;
 }
 
 const TableContext = React.createContext<TableContextType>({ data: [], setData: () => {} });
 
 export function TableContextProvider({ children, timeRanges }: TableContextProps): JSX.Element {
-  const mapToRowTypeWithId = (data: string[]): RowTypeWithId[] =>
+  const mapToRowType = (data: string[]): RowType[] =>
     data.map((item, index) => ({
-      id: nanoid(),
       no: index + 1,
       waktu: item,
       mc: 0,
@@ -30,12 +24,10 @@ export function TableContextProvider({ children, timeRanges }: TableContextProps
       hv: 0,
     }));
 
-  const [dataMapped, setDataMapped] = React.useState<RowTypeWithId[]>(
-    mapToRowTypeWithId(timeRanges)
-  );
+  const [dataMapped, setDataMapped] = React.useState<RowType[]>(mapToRowType(timeRanges));
 
   React.useEffect(() => {
-    setDataMapped(mapToRowTypeWithId(timeRanges));
+    setDataMapped(mapToRowType(timeRanges));
   }, [timeRanges]);
 
   const contextVal = React.useMemo(

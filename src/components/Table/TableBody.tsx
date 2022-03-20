@@ -4,13 +4,9 @@ import clsx from 'clsx';
 import { RowType } from '@/types/ExcelJsType';
 import TableData from './TableData';
 
-interface RowTypeWithId extends RowType {
-  id: string;
-}
-
 interface TableBodyProps {
   index: number;
-  item: RowTypeWithId;
+  item: RowType;
 }
 
 export default function TableBody({ index, item }: TableBodyProps): JSX.Element {
