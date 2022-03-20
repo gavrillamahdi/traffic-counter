@@ -4,6 +4,16 @@ import clsx from 'clsx';
 import Navbar from '@/components/Navbar';
 import Form from '@/components/Form';
 import { TimeDataProvider } from '@/context/TimeDataProvider';
+import { ColumnType, RowType } from '@/types/ExcelJsType';
+import saveExcel from './libs/exportExcel';
+
+const COLUMN: ColumnType[] = [
+  { header: 'No', key: 'no' },
+  { header: 'Waktu', key: 'waktu' },
+  { header: 'MC', key: 'mc' },
+  { header: 'LV', key: 'lv' },
+  { header: 'HV', key: 'hv' },
+];
 
 export default function App(): JSX.Element {
   const [onTop, setOnTop] = React.useState<boolean>(true);
@@ -17,6 +27,9 @@ export default function App(): JSX.Element {
     };
   }, []);
 
+  const [timeRanges, setTimeRanges] = React.useState<string[]>([]);
+  console.log(timeRanges);
+
   return (
     <>
       <header className={clsx('sticky top-0', onTop || 'shadow-sm shadow-base-content/10')}>
@@ -24,8 +37,11 @@ export default function App(): JSX.Element {
       </header>
       <main className="p-10">
         <TimeDataProvider>
-          <Form />
+          <Form setData={setTimeRanges} />
         </TimeDataProvider>
+        <button type="button" onClick={saveExcel}>
+          tes
+        </button>
       </main>
     </>
   );
