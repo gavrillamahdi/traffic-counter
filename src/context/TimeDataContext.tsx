@@ -21,7 +21,7 @@ const TIME_DATA = { start: TIME, end: TIME, interval: TIME };
 
 const TimeDataContext = React.createContext<TimeDataContextType>({
   timeData: TIME_DATA,
-  setTimeData: (timeData) => {}, // eslint-disable-line no-unused-vars
+  setTimeData: () => {},
 });
 
 export function TimeDataContextProvider({ children }: TimeDataProviderProps): JSX.Element {
