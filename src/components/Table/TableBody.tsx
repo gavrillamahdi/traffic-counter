@@ -12,24 +12,22 @@ interface TableBodyProps {
 export default function TableBody({ index, item }: TableBodyProps): JSX.Element {
   return (
     <tr className="lg:grid lg:grid-cols-10">
-      {Object.entries(item)
-        .slice(1)
-        .map(([key, value], i) =>
-          i <= 1 ? (
-            <th
-              key={key}
-              className={clsx(
-                i === 0 && 'col-span-1',
-                i === 1 &&
-                  'col-span-3 whitespace-normal text-center md:whitespace-nowrap md:text-left'
-              )}
-            >
-              {value}
-            </th>
-          ) : (
-            <TableData key={key} colKey={key as 'mc' | 'lv' | 'hv'} rowIndex={index} />
-          )
-        )}
+      {Object.entries(item).map(([key, value], i) =>
+        i <= 1 ? (
+          <th
+            key={key}
+            className={clsx(
+              i === 0 && 'col-span-1',
+              i === 1 &&
+                'col-span-3 whitespace-normal text-center md:whitespace-nowrap md:text-left'
+            )}
+          >
+            {value}
+          </th>
+        ) : (
+          <TableData key={key} colKey={key as 'mc' | 'lv' | 'hv'} rowIndex={index} />
+        )
+      )}
     </tr>
   );
 }
