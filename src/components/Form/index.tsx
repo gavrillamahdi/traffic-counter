@@ -2,7 +2,7 @@
 import React, { useState, useMemo } from 'react';
 
 import InputSection from '@/components/Form/InputSection';
-import { useTimeDataContext } from '@/context/TimeDataProvider';
+import { useTimeDataContext } from '@/context/TimeDataContext';
 import makeTimeInterval from '@/libs/makeTimeInterval';
 
 interface FormProps {

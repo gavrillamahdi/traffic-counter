@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTimeDataContext } from '@/context/TimeDataProvider';
+import { useTimeDataContext } from '@/context/TimeDataContext';
 
 interface InputProps {
   id: string;

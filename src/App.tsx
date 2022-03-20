@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Form from '@/components/Form';
 import Table from '@/components/Table';
 
-import { TimeDataProvider } from '@/context/TimeDataProvider';
+import { TimeDataProvider } from '@/context/TimeDataContext';
 import { ColumnType } from '@/types/ExcelJsType';
 
 const COLUMN: ColumnType[] = [
