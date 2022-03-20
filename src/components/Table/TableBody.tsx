@@ -9,12 +9,11 @@ interface RowTypeWithId extends RowType {
 }
 
 interface TableBodyProps {
-  id: string;
   index: number;
   item: RowTypeWithId;
 }
 
-export default function TableBody({ id, index, item }: TableBodyProps): JSX.Element {
+export default function TableBody({ index, item }: TableBodyProps): JSX.Element {
   return (
     <tr className="lg:grid lg:grid-cols-10">
       {Object.entries(item)

@@ -34,7 +34,7 @@ export default function Table({ columns }: TableProps): JSX.Element {
         </thead>
         <tbody>
           {data.map((row, index) => (
-            <TableBody key={row.id} id={row.id} index={index} item={row} />
+            <TableBody key={row.id} index={index} item={row} />
           ))}
         </tbody>
       </table>
