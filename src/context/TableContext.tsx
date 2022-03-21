@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useLocalStorage from '@/hooks/useLocalStorage';
 import { RowType } from '@/types/ExcelJsType';
 
 interface TableContextProps {
@@ -24,10 +25,19 @@ export function TableContextProvider({ children, timeRanges }: TableContextProps
       hv: 0,
     }));
 
-  const [dataMapped, setDataMapped] = React.useState<RowType[]>(mapToRowType(timeRanges));
+  const [dataMapped, setDataMapped] = useLocalStorage<RowType[]>('data', mapToRowType(timeRanges));
 
   React.useEffect(() => {
-    setDataMapped(mapToRowType(timeRanges));
+    let isSame: boolean = false;
+
+    for (let i = 0; i < dataMapped.length; i += 1) {
+      if (dataMapped[i].waktu === timeRanges[i]) {
+        isSame = true;
+        break;
+      }
+    }
+
+    if (!isSame) setDataMapped(mapToRowType(timeRanges));
   }, [timeRanges]);
 
   const contextVal = React.useMemo(

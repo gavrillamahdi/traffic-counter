@@ -6,6 +6,8 @@ import Navbar from '@/components/Navbar';
 import Form from '@/components/Form';
 import Table from '@/components/Table';
 
+import useLocalStorage from '@/hooks/useLocalStorage';
+
 import { TimeDataContextProvider } from '@/context/TimeDataContext';
 import { TableContextProvider } from '@/context/TableContext';
 
@@ -31,7 +33,7 @@ export default function App(): JSX.Element {
     };
   }, []);
 
-  const [timeRanges, setTimeRanges] = React.useState<string[]>([]);
+  const [timeRanges, setTimeRanges] = useLocalStorage<string[]>('time-range', []);
 
   return (
     <>
