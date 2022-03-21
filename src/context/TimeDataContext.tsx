@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import useLocalStorage from '@/hooks/useLocalStorage';
 import { TimeData, Time } from '@/types/TimeDataType';
 
 interface TimeDataProviderProps {
@@ -25,7 +26,7 @@ const TimeDataContext = React.createContext<TimeDataContextType>({
 });
 
 export function TimeDataContextProvider({ children }: TimeDataProviderProps): JSX.Element {
-  const [timeData, setTimeData] = useState<TimeData>(TIME_DATA);
+  const [timeData, setTimeData] = useLocalStorage<TimeData>('time-data', TIME_DATA);
 
   const contextVal = React.useMemo(() => ({ timeData, setTimeData }), [timeData]);
 

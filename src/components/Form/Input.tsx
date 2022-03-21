@@ -16,10 +16,10 @@ export default function Input({
   spanContent,
   nextNode,
 }: InputProps): JSX.Element {
-  const { setTimeData } = useTimeDataContext();
+  const { timeData, setTimeData } = useTimeDataContext();
 
   const [inputValue, setInputValue] = React.useState<{ value: string; zeroOccurance: number }>({
-    value: '',
+    value: timeData[section][fraction] ? String(timeData[section][fraction]) : '',
     zeroOccurance: 0,
   });
 
