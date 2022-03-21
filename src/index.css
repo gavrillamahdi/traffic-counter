@@ -13,7 +13,7 @@
 
 @layer utilities {
   .input {
-    @apply h-8 w-full selection:bg-accent-focus selection:text-accent-content;
+    @apply h-8 w-full px-2 selection:bg-accent-focus selection:text-accent-content;
   }
 
   .table th:first-child {
