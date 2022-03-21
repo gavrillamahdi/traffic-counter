@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
+import HeadIcon from '@/components/HeadIcon';
 import Navbar from '@/components/Navbar';
 import Form from '@/components/Form';
 import Table from '@/components/Table';
@@ -34,6 +35,7 @@ export default function App(): JSX.Element {
 
   return (
     <>
+      <HeadIcon />
       <header className={clsx('sticky top-0 z-20', onTop || 'shadow-sm shadow-base-content/10')}>
         <Navbar />
       </header>
