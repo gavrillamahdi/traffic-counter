@@ -25,7 +25,7 @@ export default function Table({ columns }: TableProps): JSX.Element {
         <button
           title="reset counter"
           type="button"
-          className="group btn btn-circle btn-accent z-[15] mr-[.375rem] mt-[.375rem] focus-visible:outline-primary"
+          className="group btn btn-accent btn-circle z-[15] mr-[.375rem] mt-[.375rem] focus-visible:outline-primary"
           onClick={() => setData((prev) => prev.map((item) => ({ ...item, hv: 0, lv: 0, mc: 0 })))}
         >
           <VscRefresh className="text-2xl text-accent-content transition duration-700 group-hover:rotate-180" />
@@ -33,7 +33,7 @@ export default function Table({ columns }: TableProps): JSX.Element {
       </section>
 
       <section className="mx-auto w-full overflow-x-auto rounded-lg shadow-md shadow-base-content/10 md:w-11/12">
-        <table className="table-zebra table w-full">
+        <table className="table table-zebra w-full">
           <thead>
             <tr className="lg:grid lg:grid-cols-10">
               {tableHead.map((column, index) => (

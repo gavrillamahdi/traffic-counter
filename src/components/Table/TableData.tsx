@@ -13,7 +13,9 @@ export default function TableData({ rowIndex, colKey }: TableDataProps): JSX.Ele
   return (
     <td className="col-span-2">
       <div className="flex items-center justify-between">
-        <span>{data[rowIndex][colKey]}</span>
+        <span className="tooltip" data-tip={colKey.toUpperCase()}>
+          {data[rowIndex][colKey]}
+        </span>
         <div className="mr-4">
           <button
             title="decrement"
