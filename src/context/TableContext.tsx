@@ -16,14 +16,17 @@ interface TableContextType {
 const TableContext = React.createContext<TableContextType>({ data: [], setData: () => {} });
 
 export function TableContextProvider({ children, timeRanges }: TableContextProps): JSX.Element {
-  const mapToRowType = (data: string[]): RowType[] =>
-    data.map((item, index) => ({
-      no: index + 1,
-      waktu: item,
-      mc: 0,
-      lv: 0,
-      hv: 0,
-    }));
+  const mapToRowType = React.useCallback(
+    (data: string[]): RowType[] =>
+      data.map((item, index) => ({
+        no: index + 1,
+        waktu: item,
+        mc: 0,
+        lv: 0,
+        hv: 0,
+      })),
+    [timeRanges]
+  );
 
   const [dataMapped, setDataMapped] = useLocalStorage<RowType[]>('data', mapToRowType(timeRanges));
 
