@@ -1,3 +1,4 @@
+/* eslint-disable no-extend-native */
 import React from 'react';
 
 import useLocalStorage from '@/hooks/useLocalStorage';
@@ -31,16 +32,20 @@ export function TableContextProvider({ children, timeRanges }: TableContextProps
   const [dataMapped, setDataMapped] = useLocalStorage<RowType[]>('data', mapToRowType(timeRanges));
 
   React.useEffect(() => {
-    let isSame: boolean = false;
-
-    for (let i = 0; i < dataMapped.length; i += 1) {
-      if (dataMapped[i].waktu === timeRanges[i]) {
-        isSame = true;
-        break;
+    let isSame: boolean = true;
+    if (dataMapped.length !== timeRanges.length) isSame = false;
+    else {
+      for (let i = 0; i < dataMapped.length; i += 1) {
+        if (dataMapped[i].waktu !== timeRanges[i]) {
+          isSame = false;
+          break;
+        }
       }
     }
 
-    if (!isSame) setDataMapped(mapToRowType(timeRanges));
+    if (!isSame) {
+      setDataMapped(mapToRowType(timeRanges));
+    }
   }, [timeRanges]);
 
   const contextVal = React.useMemo(
