@@ -1,5 +1,5 @@
 /* eslint jsx-a11y/label-has-associated-control: ["error", { assert: "either" } ] */
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 
 import InputSection from '@/components/Form/InputSection';
 import { useTimeDataContext } from '@/context/TimeDataContext';
@@ -50,22 +50,19 @@ export default function Form({ setData }: FormProps): JSX.Element {
     setInputEls(document.querySelectorAll('input[type=number]'));
   }, []);
 
-  const handleSubmit = useMemo(
-    () => (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      e.currentTarget.querySelector<HTMLButtonElement>('#submit')?.focus();
-      try {
-        const data = makeTimeInterval(timeData);
-        setData(data);
-        setError({ isError: false, message: '' });
-      } catch (err) {
-        if (err instanceof Error) {
-          setError({ isError: true, message: err.message });
-        }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    e.currentTarget.querySelector<HTMLButtonElement>('#submit')?.focus();
+    try {
+      const data = makeTimeInterval(timeData);
+      setData(data);
+      setError({ isError: false, message: '' });
+    } catch (err) {
+      if (err instanceof Error) {
+        setError({ isError: true, message: err.message });
       }
-    },
-    [timeData]
-  );
+    }
+  };
 
   return (
     <form
