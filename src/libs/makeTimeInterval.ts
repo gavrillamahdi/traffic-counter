@@ -95,9 +95,7 @@ export default function makeTimeInterval(timeData: TimeData): string[] {
   let current: dayjs.Dayjs = start.clone();
 
   while (true) {
-    arrayOfTime.push(
-      `${current.format('HH:mm:ss')} - ${current.add(interval, 'ms').format('HH:mm:ss')}`
-    );
+    arrayOfTime.push(`${current.format('HH:mm')} - ${current.add(interval, 'ms').format('HH:mm')}`);
 
     current = current.add(interval, 'ms');
     if (!current.isBetween(start, end, null, '[)')) break;
