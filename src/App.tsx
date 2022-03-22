@@ -1,8 +1,7 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import HeadIcon from '@/components/HeadIcon';
-import Navbar from '@/components/Navbar';
+import Header from '@/components/Header';
 import Form from '@/components/Form';
 import Table from '@/components/Table';
 
@@ -22,25 +21,12 @@ const COLUMN: ColumnType[] = [
 ];
 
 export default function App(): JSX.Element {
-  const [onTop, setOnTop] = React.useState<boolean>(true);
-  React.useEffect(() => {
-    const handleScroll = () => {
-      setOnTop(window.pageYOffset === 0);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   const [timeRanges, setTimeRanges] = useLocalStorage<string[]>('time-range', []);
 
   return (
     <>
       <HeadIcon />
-      <header className={clsx('sticky top-0 z-20', onTop || 'shadow-sm shadow-base-content/10')}>
-        <Navbar />
-      </header>
+      <Header />
 
       <main className="p-10">
         <TimeDataContextProvider>
