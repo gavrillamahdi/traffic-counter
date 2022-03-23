@@ -8,7 +8,7 @@ interface InputSectionProps {
   fractions: ['hour', 'minute', 'second'];
   spanContents: ['h', 'm', 's'];
   inputSectionName: string;
-  nextNode?: HTMLInputElement[] | undefined;
+  Node?: (HTMLInputElement | undefined)[];
 }
 
 export default function InputSection({
@@ -17,7 +17,7 @@ export default function InputSection({
   fractions,
   spanContents,
   inputSectionName,
-  nextNode,
+  Node,
 }: InputSectionProps): JSX.Element {
   return (
     <section className="form-control w-full">
@@ -32,7 +32,8 @@ export default function InputSection({
             section={section}
             fraction={fractions[index]}
             spanContent={spanContents[index]}
-            nextNode={nextNode ? nextNode[index + 1] : undefined}
+            nextNode={Node ? Node[index + 2] : undefined}
+            prevNode={Node ? Node[index] : undefined}
           />
         ))}
       </div>
@@ -40,4 +41,4 @@ export default function InputSection({
   );
 }
 
-InputSection.defaultProps = { nextNode: undefined };
+InputSection.defaultProps = { Node: undefined };

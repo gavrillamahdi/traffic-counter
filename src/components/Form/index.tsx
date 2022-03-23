@@ -69,7 +69,7 @@ export default function Form({ setData }: FormProps): JSX.Element {
       onSubmit={handleSubmit}
       className="grid grid-cols-1 gap-x-20 gap-y-8 md:grid-cols-2 lg:mx-auto lg:w-4/5"
     >
-      {['Start Survey Time', 'End Survey Time', 'Interval Time'].map((title, index) => (
+      {['Start Survey Time', 'End Survey Time', 'Interval Time'].map((title, index, arr) => (
         <InputSection
           key={title}
           inputSectionName={title}
@@ -77,11 +77,15 @@ export default function Form({ setData }: FormProps): JSX.Element {
           inputIds={[START_ID, END_ID, INTERVAL_ID][index]}
           fractions={FRACTIONS}
           spanContents={SPAN_CONTENT}
-          nextNode={
-            inputEls
-              ? sliceNodeList(inputEls, index * 3, index * 3 + 3 === 9 ? index * 3 + 3 : undefined)
-              : undefined
-          }
+          Node={(() => {
+            if (inputEls) {
+              if (index === 0) {
+                return [undefined, ...sliceNodeList(inputEls, 0)];
+              }
+              return sliceNodeList(inputEls, index * arr.length - 1);
+            }
+            return undefined;
+          })()}
         />
       ))}
 

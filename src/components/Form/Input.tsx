@@ -7,6 +7,7 @@ interface InputProps {
   fraction: 'hour' | 'minute' | 'second';
   spanContent: 'h' | 'm' | 's';
   nextNode?: HTMLInputElement | undefined;
+  prevNode?: HTMLInputElement | undefined;
 }
 
 export default function Input({
@@ -15,6 +16,7 @@ export default function Input({
   fraction,
   spanContent,
   nextNode,
+  prevNode,
 }: InputProps): JSX.Element {
   const { timeData, setTimeData } = useTimeDataContext();
 
@@ -35,6 +37,15 @@ export default function Input({
 
           if (value.length === 2 || +value > (fraction === 'hour' ? 2 : 5)) {
             if (nextNode) nextNode.focus();
+            setTimeData((prev) => ({
+              ...prev,
+              [section]: { ...prev[section], [fraction]: +value },
+            }));
+          }
+
+          if (value.length > 2) {
+            setInputValue((prev) => prev.slice(-2));
+            if (nextNode) nextNode.focus();
           }
         }}
         onKeyDown={(e) => {
@@ -46,6 +57,12 @@ export default function Input({
               ...prev,
               [section]: { ...prev[section], [fraction]: 0 },
             }));
+          } else if (['ArrowRight'].includes(e.key)) {
+            e.preventDefault();
+            if (nextNode) nextNode.focus();
+          } else if (['ArrowLeft'].includes(e.key)) {
+            e.preventDefault();
+            if (prevNode) prevNode.focus();
           }
         }}
         onFocus={(e) => e.target.select()}
@@ -69,4 +86,4 @@ export default function Input({
   );
 }
 
-Input.defaultProps = { nextNode: undefined };
+Input.defaultProps = { nextNode: undefined, prevNode: undefined };
