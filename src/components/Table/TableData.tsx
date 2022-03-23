@@ -4,7 +4,7 @@ import { useTableContext } from '@/context/TableContext';
 
 interface TableDataProps {
   rowIndex: number;
-  colKey: 'hv' | 'lv' | 'mc';
+  colKey: 'lv' | 'mhv' | 'hv';
 }
 
 export default function TableData({ rowIndex, colKey }: TableDataProps): JSX.Element {

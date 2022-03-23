@@ -21,9 +21,9 @@ export function TableContextProvider({ children, timeRanges }: TableContextProps
     (data: string[]): RowType[] =>
       data.map((item, index) => ({
         no: index + 1,
-        waktu: item,
-        mc: 0,
+        jam: item,
         lv: 0,
+        mhv: 0,
         hv: 0,
       })),
     [timeRanges]
@@ -36,7 +36,7 @@ export function TableContextProvider({ children, timeRanges }: TableContextProps
     if (dataMapped.length !== timeRanges.length) isSame = false;
     else {
       for (let i = 0; i < dataMapped.length; i += 1) {
-        if (dataMapped[i].waktu !== timeRanges[i]) {
+        if (dataMapped[i].jam !== timeRanges[i]) {
           isSame = false;
           break;
         }
@@ -44,6 +44,10 @@ export function TableContextProvider({ children, timeRanges }: TableContextProps
     }
 
     if (!isSame) {
+      setDataMapped(mapToRowType(timeRanges));
+    }
+
+    if (Object.keys(dataMapped) !== Object.keys(timeRanges)) {
       setDataMapped(mapToRowType(timeRanges));
     }
   }, [timeRanges]);

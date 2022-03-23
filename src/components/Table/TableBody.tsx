@@ -25,7 +25,7 @@ export default function TableBody({ index, item }: TableBodyProps): JSX.Element 
             {value}
           </th>
         ) : (
-          <TableData key={key} colKey={key as 'mc' | 'lv' | 'hv'} rowIndex={index} />
+          <TableData key={key} colKey={key as 'lv' | 'mhv' | 'hv'} rowIndex={index} />
         )
       )}
     </tr>

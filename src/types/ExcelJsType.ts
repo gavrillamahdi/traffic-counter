@@ -5,8 +5,8 @@ export interface ColumnType {
 
 export interface RowType {
   no: number;
-  waktu: string;
-  mc: number;
+  jam: string;
   lv: number;
+  mhv: number;
   hv: number;
 }
