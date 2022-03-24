@@ -43,11 +43,13 @@ export function TableContextProvider({ children, timeRanges }: TableContextProps
       }
     }
 
-    if (!isSame) {
-      setDataMapped(mapToRowType(timeRanges));
-    }
+    let sameKeys: boolean = true;
 
-    if (Object.keys(dataMapped) !== Object.keys(timeRanges)) {
+    Object.keys(dataMapped[0]).forEach((key, index) => {
+      if (key !== Object.keys(mapToRowType([''])[0])[index]) sameKeys = false;
+    });
+
+    if (!isSame || !sameKeys) {
       setDataMapped(mapToRowType(timeRanges));
     }
   }, [timeRanges]);
